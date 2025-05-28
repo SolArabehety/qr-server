@@ -1,6 +1,8 @@
 package com.solara.qr_server.controllers;
 
 
+import com.solara.qr_server.model.Seed;
+import com.solara.qr_server.services.SeedService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,9 +15,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/seed")
 public class QRServerController {
+    private final SeedService seedService;
 
+    public QRServerController(SeedService seedService) {
+        this.seedService = seedService;
+    }
     @GetMapping
-    public String generateSeed() {
-        return "test";
+    public Seed generateSeed() {
+        return seedService.generateSeed();
     }
 }
